@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>authorName</key>
+		<string>Tom Ferry</string>
+		<key>audioName</key>
+		<string>Ahead of the Curve Call</string>
+		<key>audioImage</key>
+		<string>tomFerry.jpg</string>
+	</dict>
+	<dict>
+		<key>authorName</key>
+		<string>Sheila Mcgraw</string>
+		<key>audioName</key>
+		<string>Sale Skills</string>
+		<key>audioImage</key>
+		<string>sheilaMcgraw</string>
+	</dict>
+	<dict>
+		<key>authorName</key>
+		<string>Bill Pipes</string>
+		<key>audioName</key>
+		<string>Fear to Phone Call</string>
+		<key>audioImage</key>
+		<string>billPipes</string>
+	</dict>
+</array>
+</plist>
