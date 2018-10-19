@@ -14,9 +14,9 @@
 		<key>authorName</key>
 		<string>Sheila Mcgraw</string>
 		<key>audioName</key>
-		<string>Sale Skills</string>
+		<string>Sales Skills</string>
 		<key>audioImage</key>
-		<string>sheilaMcgraw</string>
+		<string>sheilaMcgraw.jpg</string>
 	</dict>
 	<dict>
 		<key>authorName</key>
@@ -24,7 +24,7 @@
 		<key>audioName</key>
 		<string>Fear to Phone Call</string>
 		<key>audioImage</key>
-		<string>billPipes</string>
+		<string>billPipes.jpg</string>
 	</dict>
 </array>
 </plist>

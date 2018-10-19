@@ -10,15 +10,22 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
+extension UIImageView {
+    func setRound() {
+        let radius = self.frame.width / 2
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+    }
+}
 
-class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
+
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate {
 
     
     
     //MARK: - Global Variables
     var audioPlayer: AVAudioPlayer! = nil
     var audioList: NSArray!
-    var finalImage: UIImage!
     
     var currentAudio = ""
     var currentAudioPath: URL!
@@ -40,9 +47,8 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     
 
     //MARK: - OUTLETS
-    @IBOutlet weak var backgroundImage: UIImageView!
     
-    @IBOutlet weak var AudioImage: UIImageView!
+    @IBOutlet weak var audioImage: UIImageView!
     
     @IBOutlet weak var audioNameLabel: UILabel!
     
@@ -76,25 +82,45 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     
     @IBOutlet weak var blurView : UIVisualEffectView!
     
+    @IBOutlet weak var tableViewContainerTopConstrain: NSLayoutConstraint!
     
     
-    
-    //MARK: - override func
+    //MARK: - OVERRIDE FUNCS
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //backgroundImage.image =  UIImage(named: "blueGradient")
         
-        //tableViewContainer.isHidden = true
-        //tableView.isHidden = true
-        //blurView.isHidden = true
+        retrieveSavedTrackNumber()
+        prepareAudio()
+        updateAudioLabels()
+        setRepeatAndShuffle()
+        
+        //assignSliderUI()
+        //retrievePlayerSliderValue()
+        
+//        blurView.isHidden = true
+//        tableView.isHidden = true
+//        tableViewContainer.isHidden = true
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        blurView.isHidden = false
+        effectToggle = !effectToggle
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        audioImage.setRound()
     }
     
     
     
     
-    //MARK: - tableViews
+    //MARK: - TABLEVIEWS
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -107,6 +133,9 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var audioNameDict = NSDictionary()
         audioNameDict = audioList.object(at: (indexPath as NSIndexPath).row) as! NSDictionary
+        
+        print("audioNameDict: \(audioNameDict)")
+        
         let audioName = audioNameDict.value(forKey: "audioName") as! String
         
         
@@ -128,7 +157,7 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55.0
+        return 57.0
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -147,6 +176,12 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
         tableView.deselectRow(at: indexPath, animated: true)
         tableViewOffScreen()
         currentAudioIndex = (indexPath as IndexPath).row
+        prepareAudio()
+        playAudio()
+        effectToggle = !effectToggle
+        switchPlayPauseButton()
+        blurView.isHidden = true
+        
     }
     
     
@@ -155,22 +190,25 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     
     func tableViewOnScreen() {
         self.blurView.isHidden = false
-        UIView.animate(withDuration: 0.15, delay: 0.01, options:
-            UIView.AnimationOptions.curveEaseIn, animations: {
-                self.tableViewContainer.layoutIfNeeded()
-        }, completion: {(bool) in
-        })
+        self.tableViewContainer.isHidden = false
+//        UIView.animate(withDuration: 0.15, delay: 0.01, options:
+//            UIView.AnimationOptions.curveEaseIn, animations: {
+//                self.tableViewContainer.layoutIfNeeded()
+//        }, completion: {(bool) in
+//        })
     }
     
     func tableViewOffScreen() {
+        self.blurView.isHidden = true
+        self.tableViewContainer.isHidden = true
         isTableViewOnScreen = false
-        UIView.animate(withDuration: 0.20, delay: 0.0, options:
-            UIView.AnimationOptions.curveEaseOut, animations: {
-                self.tableViewContainer.layoutIfNeeded()
-        }, completion: {
-            (value: Bool) in
-            self.blurView.isHidden = true
-        })
+//        UIView.animate(withDuration: 0.20, delay: 0.0, options:
+//            UIView.AnimationOptions.curveEaseOut, animations: {
+//                self.tableViewContainer.layoutIfNeeded()
+//        }, completion: {
+//            (value: Bool) in
+//            self.blurView.isHidden = true
+//        })
     }
     
     
@@ -178,7 +216,6 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     func setCurrentAudioPath() {
         currentAudio = getAudioName(currentAudioIndex)
         currentAudioPath = URL(fileURLWithPath: Bundle.main.path(forResource: currentAudio, ofType: "mp3")!)
-        print("currentAudioPath: \(currentAudioPath!)")
     }
     
     func saveCurrentTrackNumber() {
@@ -279,11 +316,32 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     }
     
     
+    
+    //MARK: - SWITCH BUTTONS
+    func switchPlayPauseButton() {
+       
+        let playIcon = UIImage(named: "i-play")
+        let pauseIcon = UIImage(named: "i-pause")
+       
+        audioPlayer.isPlaying ? playButton.setImage(pauseIcon, for: UIControl.State()) : playButton.setImage(playIcon, for: UIControl.State())
+    }
+    
+    func setRepeatAndShuffle() {
+        shuffleState = UserDefaults.standard.bool(forKey: "shuffeStatte")
+        repeatState = UserDefaults.standard.bool(forKey: "repeatState")
+        
+        shuffleState ? (shuffleButton.isSelected = true) : (shuffleButton.isSelected = false)
+        repeatState ? (repeateButton.isSelected = true) : (repeateButton.isSelected = false)
+    }
+    
+    
+    
+    
     //MARK: - get data from plist
     func getAudioData() {
         let path = Bundle.main.path(forResource: "list", ofType: "plist")
         audioList = NSArray(contentsOfFile: path!)
-        print (audioList)
+        //print (audioList)
     }
     
     
@@ -291,7 +349,7 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
         getAudioData()
         
         let audioName = (audioList![indexNumber] as! NSDictionary).value(forKey: "audioName")
-        print (audioName!)
+        //print (audioName!)
         return audioName as! String
         
         
@@ -332,14 +390,47 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
     func updateAudioLabels() {
         audioNameLabel.text =  getAudioName(currentAudioIndex)
         authorNameLabel.text = getAuthorName(currentAudioIndex)
-        AudioImage.image = UIImage(named: getAudioImage(currentAudioIndex))
+        audioImage.image = UIImage(named: getAudioImage(currentAudioIndex))
+        
+    }
+    
+    
+    //MARK: - IBActions
+    
+
+    @IBAction func play(_ sender : AnyObject) {
+        if shuffleState == true {
+            shuffleArray.removeAll()
+        }
+        if audioPlayer.isPlaying {
+            pauseAudio()
+            switchPlayPauseButton()
+        }
+        else {
+            playAudio()
+            switchPlayPauseButton()
+        }
         
     }
     
 
+    @IBAction func next(_ sender : AnyObject) {
+        playNextAudio()
+    }
     
+    @IBAction func previous(_ sender : AnyObject) {
+        playPreviousAudio()
+    }
     
-
-
+    @IBAction func presentAudioList(_ sender : AnyObject) {
+        if effectToggle {
+            isTableViewOnScreen = true
+            self.tableViewOnScreen()
+        }
+        else {
+            self.tableViewOffScreen()
+        }
+         effectToggle = !effectToggle
+    }
 }
 
