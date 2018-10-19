@@ -86,9 +86,9 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate, UITableViewDeleg
         // Do any additional setup after loading the view, typically from a nib.
         //backgroundImage.image =  UIImage(named: "blueGradient")
         
-        tableViewContainer.isHidden = true
-        tableView.isHidden = true
-        blurView.isHidden = true
+        //tableViewContainer.isHidden = true
+        //tableView.isHidden = true
+        //blurView.isHidden = true
     }
     
     
