@@ -157,16 +157,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 57.0
+        return 70.0
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tableView.backgroundColor = UIColor.clear
-        
-        let bgView = UIView(frame: CGRect.zero)
-        bgView.backgroundColor = UIColor.clear
-        
-        cell.backgroundView = bgView
         cell.backgroundColor = UIColor.clear
     }
     
