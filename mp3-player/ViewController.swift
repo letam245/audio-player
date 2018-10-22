@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var shuffleButton: UIButton!
     
-    @IBOutlet weak var repeateButton: UIButton!
+    @IBOutlet weak var repeatButton: UIButton!
     
     @IBOutlet weak var listButton: UIButton!
     
@@ -95,27 +95,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         retrieveSavedTrackNumber()
         prepareAudio()
         updateAudioLabels()
-        setRepeatAndShuffle()
-        
-        //assignSliderUI()
-        //retrievePlayerSliderValue()
-        
-//        blurView.isHidden = true
-//        tableView.isHidden = true
-//        tableViewContainer.isHidden = true
-        
+        //setRepeatAndShuffle()
+        assignSliderUI()
+        retrievePlayAudioSliderValue()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         blurView.isHidden = false
         effectToggle = !effectToggle
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         audioImage.setRound()
     }
+    
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        audioImage.setRound()
+//    }
     
     
     
@@ -134,7 +130,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var audioNameDict = NSDictionary()
         audioNameDict = audioList.object(at: (indexPath as NSIndexPath).row) as! NSDictionary
         
-        print("audioNameDict: \(audioNameDict)")
         
         let audioName = audioNameDict.value(forKey: "audioName") as! String
         
@@ -157,7 +152,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 57.0
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -166,7 +161,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    //MARK: - tableViewDelegate
+    //MARK: - TABLE VIEW DELEGATE
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         tableViewOffScreen()
@@ -181,29 +176,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    //MARK: - animate tableViewlist on/off screen
+    //MARK: - ANIMATE tableViewlist on/off screen
     
     func tableViewOnScreen() {
         self.blurView.isHidden = false
         self.tableViewContainer.isHidden = false
-//        UIView.animate(withDuration: 0.15, delay: 0.01, options:
-//            UIView.AnimationOptions.curveEaseIn, animations: {
-//                self.tableViewContainer.layoutIfNeeded()
-//        }, completion: {(bool) in
-//        })
     }
     
     func tableViewOffScreen() {
         self.blurView.isHidden = true
         self.tableViewContainer.isHidden = true
         isTableViewOnScreen = false
-//        UIView.animate(withDuration: 0.20, delay: 0.0, options:
-//            UIView.AnimationOptions.curveEaseOut, animations: {
-//                self.tableViewContainer.layoutIfNeeded()
-//        }, completion: {
-//            (value: Bool) in
-//            self.blurView.isHidden = true
-//        })
     }
     
     
@@ -229,7 +212,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    //MARK: - pepare audios
+    //MARK: - PREPARE AUDIOS
     func prepareAudio() {
         setCurrentAudioPath()
         // keep music play in background
@@ -245,21 +228,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         audioLength = audioPlayer.duration
         playerAudioSlider.maximumValue = Float(audioPlayer.duration)
         playerAudioSlider.minimumValue = 0.0
+        playerAudioSlider.value = 0.0
         audioPlayer.prepareToPlay()
-        processTimerLabel.text = "00:00"
-        
-        //showTotalSongLength()
+        showTotalSongLength()
         updateAudioLabels()
+        processTimerLabel.text = "00:00:00"
+        
+        
 
         
     }
     
     
     
-    //MARK: - audios controls set up
+    //MARK: - AUDIO CONTROLS SETUP
     func playAudio() {
         audioPlayer.play()
-        //startTimer()
+        startTimer()
         updateAudioLabels()
         saveCurrentTrackNumber()
         //showMediaLockScreen()
@@ -302,6 +287,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    
+    /*
     func stopAudio() {
         audioPlayer.stop()
     }
@@ -309,6 +296,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func pauseAudio() {
         audioPlayer.pause()
     }
+    */
     
     
     
@@ -321,22 +309,177 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         audioPlayer.isPlaying ? playButton.setImage(pauseIcon, for: UIControl.State()) : playButton.setImage(playIcon, for: UIControl.State())
     }
     
+    
+    /*
+    //if wanna keep user's last clicked on shuffle or repeate button to put on viewdidload
     func setRepeatAndShuffle() {
-        shuffleState = UserDefaults.standard.bool(forKey: "shuffeStatte")
+        shuffleState = UserDefaults.standard.bool(forKey: "shuffleState")
         repeatState = UserDefaults.standard.bool(forKey: "repeatState")
         
         shuffleState ? (shuffleButton.isSelected = true) : (shuffleButton.isSelected = false)
-        repeatState ? (repeateButton.isSelected = true) : (repeateButton.isSelected = false)
+        repeatState ? (repeatButton.isSelected = true) : (repeatButton.isSelected = false)
+    }
+    */
+    
+    
+    
+    //MARK: - UPDATE UI LABELS
+    func updateAudioLabels() {
+        audioNameLabel.text =  getAudioName(currentAudioIndex)
+        authorNameLabel.text = getAuthorName(currentAudioIndex)
+        audioImage.image = UIImage(named: getAudioImage(currentAudioIndex))
+        
+    }
+    
+    
+    func assignSliderUI() {
+        let minImage = UIImage(named: "slider-track-fill")
+        let maxImage = UIImage(named: "slider-track")
+        let thumb = UIImage(named: "slider-thumb")
+        
+        playerAudioSlider.setMinimumTrackImage(minImage, for: UIControl.State())
+        playerAudioSlider.setMaximumTrackImage(maxImage, for: UIControl.State())
+        playerAudioSlider.setThumbImage(thumb, for: UIControl.State())
     }
     
     
     
     
-    //MARK: - get data from plist
+    //MARK: - TIME CALCULATE
+    func convertTime(_ duration: TimeInterval) ->(hour: String, minute: String, second: String) {
+        let intHour = abs(Int((duration/3600).truncatingRemainder(dividingBy: 60)))
+        let intMinute = abs(Int((duration/60).truncatingRemainder(dividingBy: 60)))
+        let intSecond = abs(Int(duration.truncatingRemainder(dividingBy: 60)))
+        
+        let hour = intHour > 9 ? "\(intHour)" : "0\(intHour)"
+        let minute = intMinute > 9 ? "\(intMinute)" : "0\(intMinute)"
+        let second = intSecond > 9 ? "\(intSecond)" : "0\(intSecond)"
+        
+        return (hour, minute, second)
+    }
+    
+    func calculateAudioLength() {
+        let time = convertTime(audioLength)
+        totalAudioLength = "\(time.hour):\(time.minute):\(time.second)"
+    }
+    
+    func showTotalSongLength(){
+        calculateAudioLength()
+        totalAudioLengthLabel.text = totalAudioLength
+    }
+    
+    func startTimer() {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.update(_:)), userInfo: nil, repeats: true)
+            timer.fire()
+    }
+    
+    
+    func stopTimer() {
+        timer.invalidate()
+    }
+    
+    @objc func update(_ timer: Timer) {
+        if !audioPlayer.isPlaying {
+            return
+        }
+        else {
+            let time = convertTime(audioPlayer.currentTime)
+            
+            processTimerLabel.text = "\(time.hour):\(time.minute):\(time.second)"
+            playerAudioSlider.value = Float(audioPlayer.currentTime)
+            UserDefaults.standard.set(playerAudioSlider.value, forKey: "playerAudioSliderValue")
+        }
+
+    }
+    
+    func retrievePlayAudioSliderValue(){
+        let playerAudioSliderValue = UserDefaults.standard.float(forKey: "playerAudioSliderValue")
+
+        if playerAudioSliderValue != 0 {
+            playerAudioSlider.value = playerAudioSliderValue
+            audioPlayer.currentTime = TimeInterval(playerAudioSliderValue)
+            
+            let time = convertTime(audioPlayer.currentTime)
+            processTimerLabel.text = "\(time.hour):\(time.minute):\(time.second)"
+            playerAudioSlider.value = Float(audioPlayer.currentTime)
+        }
+        else {
+            playerAudioSlider.value = 0.0
+            audioPlayer.currentTime = 0.0
+            processTimerLabel.text = "00:00:00"
+        }
+    }
+    
+    
+    
+    //MARK: - Audioplayer DELEGATE CALLBACK
+    
+    func getRandomIndex() {
+        var randomIndex = 0
+        var newIndex = false
+        while newIndex == false {
+            randomIndex = Int(arc4random_uniform(UInt32(audioList.count)))
+            shuffleArray.contains(randomIndex) ? (newIndex = false) : (newIndex = true)
+        }
+        currentAudioIndex = randomIndex
+        print("+++++++randomeindex: \(randomIndex)+++++++")
+    }
+    
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag == true {
+            if shuffleState == false && repeatState == false {
+                if currentAudioIndex != audioList.count-1 {
+                    playNextAudio()
+                    playButton.setImage(UIImage(named: "i-pause"), for: UIControl.State())
+                    playAudio()
+                }
+                else {
+                    playButton.setImage(UIImage(named: "i-play"), for: UIControl.State())
+                    return
+                }
+            }
+            else if shuffleState == false && repeatState == true {
+                prepareAudio()
+                playAudio()
+            }
+            else if shuffleState == true && repeatState == false {
+                //shuffle audios till all the audios are played
+                shuffleArray.append(currentAudioIndex)
+                if shuffleArray.count >= audioList.count {
+                    playButton.setImage(UIImage(named: "i-play"), for: UIControl.State())
+                    shuffleButton.isSelected = false
+                    shuffleArray.removeAll()
+                    shuffleState = false
+                    return
+                }
+                getRandomIndex()
+                prepareAudio()
+                playAudio()
+                
+            }
+            else if shuffleState == true && repeatState == true {
+                //shuffle audios and play on loop FOREVER
+                 shuffleArray.append(currentAudioIndex)
+                if shuffleArray.count >= audioList.count {
+                    shuffleArray.removeAll()
+                }
+                getRandomIndex()
+                prepareAudio()
+                playAudio()
+                
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    //MARK: - GET AUDIOS
     func getAudioData() {
         let path = Bundle.main.path(forResource: "list", ofType: "plist")
         audioList = NSArray(contentsOfFile: path!)
-        //print (audioList)
     }
     
     
@@ -346,8 +489,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let audioName = (audioList![indexNumber] as! NSDictionary).value(forKey: "audioName")
         //print (audioName!)
         return audioName as! String
-        
-        
         
         //var audioDataDict = NSDictionary()
         //audioDataDict = audioList.object(at: indexNumber) as! NSDictionary
@@ -381,24 +522,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    //MARK: - UPDATE UI Labels
-    func updateAudioLabels() {
-        audioNameLabel.text =  getAudioName(currentAudioIndex)
-        authorNameLabel.text = getAuthorName(currentAudioIndex)
-        audioImage.image = UIImage(named: getAudioImage(currentAudioIndex))
-        
-    }
-    
-    
-    //MARK: - IBActions
-    
 
+    //MARK: - IBActions
     @IBAction func play(_ sender : AnyObject) {
         if shuffleState == true {
             shuffleArray.removeAll()
         }
         if audioPlayer.isPlaying {
-            pauseAudio()
+            //pauseAudio()
+            audioPlayer.pause()
             switchPlayPauseButton()
         }
         else {
@@ -417,6 +549,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         playPreviousAudio()
     }
     
+    @IBAction func sliderDraggingLocation(_ sender: UISlider) {
+        audioPlayer.currentTime = TimeInterval(sender.value)
+    }
+    
     @IBAction func presentAudioList(_ sender : AnyObject) {
         if effectToggle {
             isTableViewOnScreen = true
@@ -426,6 +562,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableViewOffScreen()
         }
          effectToggle = !effectToggle
+    }
+    
+    @IBAction func repeatButtonClicked(_ sender : UIButton) {
+        if sender.isSelected == true {
+            sender.isSelected = false
+            repeatState = false
+            UserDefaults.standard.set(false, forKey: "repeatState")
+        }
+        else {
+            sender.isSelected = true
+            repeatState = true
+            UserDefaults.standard.set(false, forKey: "repeatState")
+        }
+    }
+    
+    @IBAction func shuffleButtonClicked(_ sender: UIButton) {
+        shuffleArray.removeAll()
+        if sender.isSelected == true {
+            sender.isSelected = false
+            shuffleState = false
+            UserDefaults.standard.set(false, forKey: "shuffleState")
+        }
+        else {
+            sender.isSelected = true
+            shuffleState = true
+            UserDefaults.standard.set(false, forKey: "shuffleState")
+        }
     }
 }
 

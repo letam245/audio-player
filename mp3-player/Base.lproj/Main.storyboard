@@ -35,12 +35,6 @@
                                             <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iRZ-Ba-sLN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POs-Qy-2KE" userLabel="Repeate">
-                                        <rect key="frame" x="330" y="20" width="25" height="15"/>
-                                        <state key="normal" image="i-repeate.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6O-pY-hpU" userLabel="Next">
                                         <rect key="frame" x="255" y="15" width="26" height="25"/>
                                         <constraints>
@@ -66,14 +60,28 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQH-f6-u8U" userLabel="shuffle">
-                                        <rect key="frame" x="20" y="20" width="25" height="15"/>
+                                        <rect key="frame" x="25" y="20" width="25" height="15"/>
                                         <state key="normal" image="i-shuffle.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <state key="selected" image="i-shuffle-a.png"/>
+                                        <connections>
+                                            <action selector="shuffleButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w4r-G3-vA7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POs-Qy-2KE" userLabel="Repeat">
+                                        <rect key="frame" x="325" y="20" width="25" height="15"/>
+                                        <state key="normal" image="i-repeate.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <state key="selected" image="i-repeate-a.png"/>
+                                        <connections>
+                                            <action selector="repeatButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Eih-kf-3Gu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="aoM-ii-wfJ" firstAttribute="leading" secondItem="yQH-f6-u8U" secondAttribute="trailing" constant="115" id="0mM-eq-tPh"/>
+                                    <constraint firstItem="aoM-ii-wfJ" firstAttribute="leading" secondItem="yQH-f6-u8U" secondAttribute="trailing" constant="110" id="0mM-eq-tPh"/>
                                     <constraint firstItem="POs-Qy-2KE" firstAttribute="top" secondItem="kEu-IR-khF" secondAttribute="top" constant="20" id="12d-Vx-Ecp"/>
                                     <constraint firstItem="yQH-f6-u8U" firstAttribute="top" secondItem="kEu-IR-khF" secondAttribute="top" constant="20" id="2Fn-XD-SgU"/>
                                     <constraint firstItem="O6O-pY-hpU" firstAttribute="centerY" secondItem="kEu-IR-khF" secondAttribute="centerY" id="8jT-PN-QRO"/>
@@ -81,13 +89,13 @@
                                     <constraint firstItem="aoM-ii-wfJ" firstAttribute="leading" secondItem="5jB-Ej-kHC" secondAttribute="trailing" constant="40" id="C47-iF-gsH"/>
                                     <constraint firstAttribute="width" secondItem="kEu-IR-khF" secondAttribute="height" multiplier="75:11" id="F1H-fB-fhg"/>
                                     <constraint firstItem="O6O-pY-hpU" firstAttribute="leading" secondItem="aoM-ii-wfJ" secondAttribute="trailing" constant="40" id="GVV-OK-TZe"/>
-                                    <constraint firstItem="POs-Qy-2KE" firstAttribute="leading" secondItem="aoM-ii-wfJ" secondAttribute="trailing" constant="115" id="Ghn-fb-8Hh"/>
+                                    <constraint firstItem="POs-Qy-2KE" firstAttribute="leading" secondItem="aoM-ii-wfJ" secondAttribute="trailing" constant="110" id="Ghn-fb-8Hh"/>
                                     <constraint firstAttribute="bottom" secondItem="5jB-Ej-kHC" secondAttribute="bottom" constant="15" id="Ml8-yr-zyJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="POs-Qy-2KE" secondAttribute="trailing" constant="20" id="ORh-Sq-xWs"/>
+                                    <constraint firstAttribute="trailing" secondItem="POs-Qy-2KE" secondAttribute="trailing" constant="25" id="ORh-Sq-xWs"/>
                                     <constraint firstAttribute="bottom" secondItem="yQH-f6-u8U" secondAttribute="bottom" constant="20" id="Sfm-8b-Nu1"/>
                                     <constraint firstItem="aoM-ii-wfJ" firstAttribute="top" secondItem="kEu-IR-khF" secondAttribute="top" id="YNv-yf-AkF"/>
                                     <constraint firstAttribute="bottom" secondItem="POs-Qy-2KE" secondAttribute="bottom" constant="20" id="ZYb-oX-UC2"/>
-                                    <constraint firstItem="yQH-f6-u8U" firstAttribute="leading" secondItem="kEu-IR-khF" secondAttribute="leading" constant="20" id="a2c-lP-dwR"/>
+                                    <constraint firstItem="yQH-f6-u8U" firstAttribute="leading" secondItem="kEu-IR-khF" secondAttribute="leading" constant="25" id="a2c-lP-dwR"/>
                                     <constraint firstItem="O6O-pY-hpU" firstAttribute="top" secondItem="kEu-IR-khF" secondAttribute="top" constant="15" id="cRd-W0-dZw"/>
                                     <constraint firstAttribute="bottom" secondItem="aoM-ii-wfJ" secondAttribute="bottom" id="dCa-Fm-59t"/>
                                     <constraint firstItem="5jB-Ej-kHC" firstAttribute="centerY" secondItem="kEu-IR-khF" secondAttribute="centerY" id="gSE-V4-DMh"/>
@@ -99,6 +107,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eu-gQ-pz7" userLabel="imageContainer">
                                 <rect key="frame" x="0.0" y="101" width="375" height="175"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="OAY-u9-TBm" userLabel="shadow">
+                                        <rect key="frame" x="87" y="15" width="201" height="175"/>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AhS-f4-4aW" userLabel="Audio Image">
                                         <rect key="frame" x="100" y="0.0" width="175" height="175"/>
                                         <constraints>
@@ -108,17 +119,21 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6eu-gQ-pz7" secondAttribute="height" multiplier="15:7" id="0ly-zO-LVf"/>
+                                    <constraint firstItem="OAY-u9-TBm" firstAttribute="centerX" secondItem="6eu-gQ-pz7" secondAttribute="centerX" id="1To-HL-0A9"/>
                                     <constraint firstItem="AhS-f4-4aW" firstAttribute="top" secondItem="6eu-gQ-pz7" secondAttribute="top" id="3ZT-YS-DRi"/>
+                                    <constraint firstAttribute="bottom" secondItem="OAY-u9-TBm" secondAttribute="bottom" constant="-15" id="Ifu-vY-piX"/>
                                     <constraint firstAttribute="bottom" secondItem="AhS-f4-4aW" secondAttribute="bottom" id="Kb3-Lr-GOm"/>
+                                    <constraint firstItem="AhS-f4-4aW" firstAttribute="width" secondItem="OAY-u9-TBm" secondAttribute="width" multiplier="1:1.15" id="Pzd-qn-feB"/>
                                     <constraint firstItem="AhS-f4-4aW" firstAttribute="centerX" secondItem="6eu-gQ-pz7" secondAttribute="centerX" id="TmY-ej-gmc"/>
+                                    <constraint firstItem="OAY-u9-TBm" firstAttribute="top" secondItem="6eu-gQ-pz7" secondAttribute="top" constant="15" id="dX8-bI-cT9"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3WQ-9K-ugH" userLabel="titleContainer">
                                 <rect key="frame" x="0.0" y="306" width="375" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpc-3g-wyX">
-                                        <rect key="frame" x="121.5" y="0.0" width="132.5" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <rect key="frame" x="106.5" y="0.0" width="162" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -138,27 +153,30 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Nw-cB-EUP" userLabel="sliderContainer">
-                                <rect key="frame" x="0.0" y="472" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="482" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LwP-TZ-ECb" userLabel="Progress Timer Label">
-                                        <rect key="frame" x="25" y="35" width="34" height="15"/>
+                                        <rect key="frame" x="25" y="25" width="34" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgQ-Pk-keF" userLabel="Total Audio Length Label">
-                                        <rect key="frame" x="316" y="35" width="34" height="15"/>
+                                        <rect key="frame" x="316" y="25" width="34" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bUT-g7-t59">
                                         <rect key="frame" x="23" y="0.0" width="329" height="31"/>
+                                        <connections>
+                                            <action selector="sliderDraggingLocation:" destination="BYZ-38-t0r" eventType="valueChanged" id="mHi-Gf-UvE"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="bgQ-Pk-keF" secondAttribute="bottom" id="7Ag-OQ-lsu"/>
-                                    <constraint firstAttribute="height" constant="50" id="CZg-Cx-sly"/>
+                                    <constraint firstAttribute="height" constant="40" id="CZg-Cx-sly"/>
                                     <constraint firstItem="bUT-g7-t59" firstAttribute="top" secondItem="5Nw-cB-EUP" secondAttribute="top" id="Ipc-dP-d1R"/>
                                     <constraint firstAttribute="trailing" secondItem="bUT-g7-t59" secondAttribute="trailing" constant="25" id="Ndi-0m-N1J"/>
                                     <constraint firstAttribute="trailing" secondItem="bgQ-Pk-keF" secondAttribute="trailing" constant="25" id="daw-A2-4b0"/>
@@ -275,8 +293,8 @@
                         <outlet property="playerAudioSlider" destination="bUT-g7-t59" id="AIa-NI-Rbe"/>
                         <outlet property="previousButton" destination="5jB-Ej-kHC" id="lB8-AW-wc6"/>
                         <outlet property="processTimerLabel" destination="LwP-TZ-ECb" id="gB5-qW-gbf"/>
-                        <outlet property="repeateButton" destination="POs-Qy-2KE" id="uMf-mK-kJS"/>
-                        <outlet property="shuffleButton" destination="yQH-f6-u8U" id="0M7-4T-o5Y"/>
+                        <outlet property="repeatButton" destination="POs-Qy-2KE" id="srd-wj-Bsx"/>
+                        <outlet property="shuffleButton" destination="yQH-f6-u8U" id="y0F-Ho-zsV"/>
                         <outlet property="tableView" destination="nIO-gc-fA8" id="ObK-I5-5i4"/>
                         <outlet property="tableViewContainer" destination="zmw-Tq-01S" id="li8-fd-UsF"/>
                         <outlet property="totalAudioLengthLabel" destination="bgQ-Pk-keF" id="Kcu-6G-rPa"/>
@@ -293,7 +311,10 @@
         <image name="i-next-a.png" width="126" height="90"/>
         <image name="i-play.png" width="168" height="168"/>
         <image name="i-previous-a.png" width="126" height="90"/>
+        <image name="i-repeate-a.png" width="63" height="47"/>
         <image name="i-repeate.png" width="63" height="48"/>
+        <image name="i-shuffle-a.png" width="63" height="42"/>
         <image name="i-shuffle.png" width="63" height="42"/>
+        <image name="shadow.png" width="475" height="475"/>
     </resources>
 </document>
