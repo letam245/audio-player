@@ -111,15 +111,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewWillAppear(animated)
         blurView.isHidden = false
         effectToggle = !effectToggle
-        audioImage.setRound()
+        //audioImage.setRound()
     }
     
-    /*
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         audioImage.setRound()
     }
-    */
+    
     
     
     
@@ -529,9 +529,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //return audioImage
     }
     
-    //MARK: - TAP GUESTURE
     
-
+    
+    
+    //MARK: - TAP GUESTURE
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
         next(self)
     }
@@ -540,6 +541,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
         previous(self)
     }
+    
     
     
     //MARK: - IBActions
