@@ -201,6 +201,14 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1V-9J-3LK" userLabel="Swipe View">
+                                <rect key="frame" x="0.0" y="74" width="375" height="232"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aaY-UE-mpX" appends="YES" id="n6D-ve-HBV"/>
+                                    <outletCollection property="gestureRecognizers" destination="vdF-RM-Cji" appends="YES" id="rHg-2r-kPp"/>
+                                </connections>
+                            </view>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmw-Tq-01S" userLabel="tableViewContainer">
                                 <rect key="frame" x="0.0" y="74" width="375" height="593"/>
                                 <subviews>
@@ -261,15 +269,18 @@
                             <constraint firstItem="6eu-gQ-pz7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1oE-zv-rO7"/>
                             <constraint firstItem="3WQ-9K-ugH" firstAttribute="top" secondItem="6eu-gQ-pz7" secondAttribute="bottom" constant="30" id="38P-IG-EqF"/>
                             <constraint firstAttribute="bottom" secondItem="els-Lv-JSL" secondAttribute="bottom" id="6R3-eT-ETs"/>
+                            <constraint firstItem="3WQ-9K-ugH" firstAttribute="top" secondItem="i1V-9J-3LK" secondAttribute="bottom" id="7N7-5J-GR3"/>
                             <constraint firstItem="TIV-H0-MQz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7zV-6w-Ovv"/>
                             <constraint firstAttribute="trailing" secondItem="CSl-cq-K1M" secondAttribute="trailing" id="8XB-Ij-dcr"/>
                             <constraint firstItem="CSl-cq-K1M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BrZ-1z-h3u"/>
                             <constraint firstItem="els-Lv-JSL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C2p-tX-N1A"/>
                             <constraint firstItem="5Nw-cB-EUP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="D6M-tL-W4o"/>
+                            <constraint firstItem="i1V-9J-3LK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="74" id="Fpy-Uc-UaE"/>
                             <constraint firstAttribute="trailing" secondItem="TIV-H0-MQz" secondAttribute="trailing" id="Hbi-ep-hWF"/>
                             <constraint firstAttribute="trailing" secondItem="els-Lv-JSL" secondAttribute="trailing" id="IRv-Hf-xc8"/>
                             <constraint firstItem="CSl-cq-K1M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="J7T-6G-rCS"/>
                             <constraint firstItem="5Nw-cB-EUP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MEY-DE-ooa"/>
+                            <constraint firstItem="i1V-9J-3LK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MJu-Ep-ALm"/>
                             <constraint firstItem="6eu-gQ-pz7" firstAttribute="top" secondItem="Ubh-kG-b16" secondAttribute="bottom" id="N5r-va-wUg"/>
                             <constraint firstAttribute="trailing" secondItem="3WQ-9K-ugH" secondAttribute="trailing" id="OCJ-RR-pZt"/>
                             <constraint firstItem="kEu-IR-khF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PM1-ad-XTe"/>
@@ -286,6 +297,7 @@
                             <constraint firstItem="Ubh-kG-b16" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bsK-Z8-6rW"/>
                             <constraint firstAttribute="trailing" secondItem="zmw-Tq-01S" secondAttribute="trailing" id="dvV-AY-l0n"/>
                             <constraint firstItem="3WQ-9K-ugH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fSs-7q-Ysa"/>
+                            <constraint firstAttribute="trailing" secondItem="i1V-9J-3LK" secondAttribute="trailing" id="ggo-fn-qwf"/>
                             <constraint firstAttribute="bottom" secondItem="kEu-IR-khF" secondAttribute="bottom" constant="55" id="iVJ-UC-KTf"/>
                             <constraint firstAttribute="bottom" secondItem="CSl-cq-K1M" secondAttribute="bottom" id="nHQ-s8-W4d"/>
                             <constraint firstItem="3WQ-9K-ugH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nkq-Hp-lfo"/>
@@ -315,6 +327,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="aaY-UE-mpX" userLabel="Swipe Gesture Recognizer left">
+                    <connections>
+                        <action selector="swipeLeft:" destination="BYZ-38-t0r" id="rOH-TM-NLf"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="vdF-RM-Cji" userLabel="Swipe Gesture Recognizer right">
+                    <connections>
+                        <action selector="swipeRight:" destination="BYZ-38-t0r" id="uIJ-q5-F05"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="27.436281859070466"/>
         </scene>

@@ -529,8 +529,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //return audioImage
     }
     
+    //MARK: - TAP GUESTURE
     
 
+    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
+        next(self)
+    }
+    
+    
+    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
+        previous(self)
+    }
+    
+    
     //MARK: - IBActions
     @IBAction func play(_ sender : AnyObject) {
         if shuffleState == true {
