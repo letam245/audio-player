@@ -17,9 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blueGradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="CSl-cq-K1M" userLabel="BackgroundImage View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CSl-cq-K1M" userLabel="BackgroundImage View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <visualEffectView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIV-H0-MQz" userLabel="Background Blurr View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eii-HZ-kXu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEu-IR-khF" userLabel="ButtonsContainer">
                                 <rect key="frame" x="0.0" y="557" width="375" height="55"/>
                                 <subviews>
@@ -132,8 +140,8 @@
                                 <rect key="frame" x="0.0" y="306" width="375" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpc-3g-wyX">
-                                        <rect key="frame" x="106.5" y="0.0" width="162" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <rect key="frame" x="120" y="0.0" width="135.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -253,10 +261,12 @@
                             <constraint firstItem="6eu-gQ-pz7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1oE-zv-rO7"/>
                             <constraint firstItem="3WQ-9K-ugH" firstAttribute="top" secondItem="6eu-gQ-pz7" secondAttribute="bottom" constant="30" id="38P-IG-EqF"/>
                             <constraint firstAttribute="bottom" secondItem="els-Lv-JSL" secondAttribute="bottom" id="6R3-eT-ETs"/>
+                            <constraint firstItem="TIV-H0-MQz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7zV-6w-Ovv"/>
                             <constraint firstAttribute="trailing" secondItem="CSl-cq-K1M" secondAttribute="trailing" id="8XB-Ij-dcr"/>
                             <constraint firstItem="CSl-cq-K1M" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BrZ-1z-h3u"/>
                             <constraint firstItem="els-Lv-JSL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C2p-tX-N1A"/>
                             <constraint firstItem="5Nw-cB-EUP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="D6M-tL-W4o"/>
+                            <constraint firstAttribute="trailing" secondItem="TIV-H0-MQz" secondAttribute="trailing" id="Hbi-ep-hWF"/>
                             <constraint firstAttribute="trailing" secondItem="els-Lv-JSL" secondAttribute="trailing" id="IRv-Hf-xc8"/>
                             <constraint firstItem="CSl-cq-K1M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="J7T-6G-rCS"/>
                             <constraint firstItem="5Nw-cB-EUP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MEY-DE-ooa"/>
@@ -271,6 +281,7 @@
                             <constraint firstItem="zmw-Tq-01S" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="74" id="Uh5-oX-cLq"/>
                             <constraint firstItem="3WQ-9K-ugH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Uu0-EZ-JRK"/>
                             <constraint firstItem="Ubh-kG-b16" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Vcr-Yj-v8U"/>
+                            <constraint firstItem="TIV-H0-MQz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Wvm-M7-wxq"/>
                             <constraint firstItem="els-Lv-JSL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="74" id="Y6S-HH-TGb"/>
                             <constraint firstItem="Ubh-kG-b16" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bsK-Z8-6rW"/>
                             <constraint firstAttribute="trailing" secondItem="zmw-Tq-01S" secondAttribute="trailing" id="dvV-AY-l0n"/>
@@ -279,6 +290,7 @@
                             <constraint firstAttribute="bottom" secondItem="CSl-cq-K1M" secondAttribute="bottom" id="nHQ-s8-W4d"/>
                             <constraint firstItem="3WQ-9K-ugH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nkq-Hp-lfo"/>
                             <constraint firstItem="kEu-IR-khF" firstAttribute="top" secondItem="5Nw-cB-EUP" secondAttribute="bottom" constant="35" id="vPj-ba-f8V"/>
+                            <constraint firstAttribute="bottom" secondItem="TIV-H0-MQz" secondAttribute="bottom" id="yTR-Pi-qme"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -286,6 +298,8 @@
                         <outlet property="audioImage" destination="AhS-f4-4aW" id="1gz-Gc-1vf"/>
                         <outlet property="audioNameLabel" destination="tpc-3g-wyX" id="wq0-L8-QDZ"/>
                         <outlet property="authorNameLabel" destination="ibQ-iz-kLJ" id="gBp-BS-mKu"/>
+                        <outlet property="backgroundBlurView" destination="TIV-H0-MQz" id="8xI-f1-nuc"/>
+                        <outlet property="backgroundImage" destination="CSl-cq-K1M" id="1fB-VS-wGT"/>
                         <outlet property="blurView" destination="els-Lv-JSL" id="DZj-9M-krK"/>
                         <outlet property="listButton" destination="sUy-vz-QyQ" id="EJI-Wd-VXV"/>
                         <outlet property="nextButton" destination="O6O-pY-hpU" id="nUj-2f-LY1"/>
@@ -306,7 +320,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="blueGradient.png" width="1334" height="2368"/>
         <image name="i-audio-list-a.png" width="63" height="47"/>
         <image name="i-next-a.png" width="126" height="90"/>
         <image name="i-play.png" width="168" height="168"/>

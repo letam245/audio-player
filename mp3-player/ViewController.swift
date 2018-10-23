@@ -48,6 +48,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     //MARK: - OUTLETS
     
+    
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     @IBOutlet weak var audioImage: UIImageView!
     
     @IBOutlet weak var audioNameLabel: UILabel!
@@ -82,7 +85,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var blurView : UIVisualEffectView!
     
-    @IBOutlet weak var tableViewContainerTopConstrain: NSLayoutConstraint!
+    @IBOutlet weak var backgroundBlurView: UIVisualEffectView!
+    
+    
+    //@IBOutlet weak var tableViewContainerTopConstrain: NSLayoutConstraint!
     
     
     //MARK: - OVERRIDE FUNCS
@@ -90,14 +96,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //backgroundImage.image =  UIImage(named: "blueGradient")
-        
         retrieveSavedTrackNumber()
         prepareAudio()
         updateAudioLabels()
         //setRepeatAndShuffle()
         assignSliderUI()
         retrievePlayAudioSliderValue()
+        backgroundImage.image =  UIImage(named: "blueGradient")
+        backgroundBlurView.isHidden = true
 
     }
     
@@ -108,10 +114,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         audioImage.setRound()
     }
     
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        audioImage.setRound()
-//    }
+    /*
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        audioImage.setRound()
+    }
+    */
     
     
     
@@ -215,6 +223,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: - PREPARE AUDIOS
     func prepareAudio() {
         setCurrentAudioPath()
+        backgroundBlurView.isHidden = false
+        backgroundImage.image = UIImage(named: getAudioImage(currentAudioIndex))
         // keep music play in background
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
@@ -234,8 +244,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         updateAudioLabels()
         processTimerLabel.text = "00:00:00"
         
-        
-
         
     }
     
