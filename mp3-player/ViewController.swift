@@ -189,6 +189,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableViewOnScreen() {
         self.blurView.isHidden = false
         self.tableViewContainer.isHidden = false
+
+       
     }
     
     func tableViewOffScreen() {
@@ -580,7 +582,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.tableViewOnScreen()
         }
         else {
-            self.tableViewOffScreen()
+            self.tableViewOffScreen();
         }
          effectToggle = !effectToggle
     }
